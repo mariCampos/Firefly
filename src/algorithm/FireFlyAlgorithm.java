@@ -43,7 +43,7 @@ public class FireFlyAlgorithm {
 		double position[];
 		for(int i = 0; i < fireFlies.length; i++){
 			position = createRandomPosition(problema.getDimensions());
-			this.fireFlies[i] = new FireFly((double)(createRandomNumberBrilhoMinimo(Parameters.BETA_MIN,Parameters.BETA_MAX)), position);
+			this.fireFlies[i] = new FireFly(position);
 		}
 	}
 	

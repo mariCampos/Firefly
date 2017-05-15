@@ -7,8 +7,7 @@ public class FireFly {
 	 private double error;
 	 public double beta;
 	 
-	 public FireFly(double intensity, double[] position){
-		 setIntensity(intensity);
+	 public FireFly( double[] position){
 		 setPosition(position);
 		 setBestPosition(position);
 	 }
