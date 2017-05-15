@@ -73,15 +73,21 @@ public class FireFlyAlgorithm {
 	private double updateGlow(double distance){
 		
 		double betaAux;
-		betaAux = Math.exp(-this.gama * distance);
+		betaAux = beta0 * Math.exp(-this.gama * distance);
 		return betaAux;
 	}
 	
-	private double[] updatePosition(double[] p1, double[] p2, double beta){
+	public double[] updatePosition(double[] p1, double[] p2, double beta){
 		double aux[] = new double[p1.length];
 		
 		for(int i = 0; i < p1.length; i++){
-			aux[i] = p1[i] + beta*(p2[i] - p1[i]) + Parameters.ALFA*(rand.nextDouble() - 0.5);
+			
+			if(problema.evaluateSolution(p1) < problema.evaluateSolution(p2)){
+				aux[i] = p1[i] + beta*(p2[i] - p1[i]) + Parameters.ALFA*(rand.nextDouble() - 0.5);
+			}else{
+				aux[i] = p1[i] + Parameters.ALFA*(rand.nextDouble() - 0.5);
+			}
+			
 		}
 				
 		return aux;
@@ -106,15 +112,15 @@ public class FireFlyAlgorithm {
 		for(int n = 0; n < Parameters.ITERACTIONS; n++){
 			for(int i = 0; i < fireFlies.length; i++){
 				for(int j = 0; j < fireFlies.length; j++){
-					if(fireFlies[j].beta > fireFlies[i].beta){
+					//if(fireFlies[j].beta < fireFlies[i].beta){
 						distance = distance(fireFlies[i].getPosition(), fireFlies[j].getPosition());
 						fireFlies[i].setIntensity(updateGlow(distance));
-						newPosition = updatePosition(fireFlies[i].getPosition(), fireFlies[j].getPosition(), fireFlies[i].getIntensity());
+						newPosition = updatePosition(fireFlies[i].position, fireFlies[j].position, fireFlies[i].getIntensity());
 						fireFlies[i].setPosition(newPosition);
 						
-					}else{
-						fireFlies[i].setPosition(createRandomPosition(Parameters.DIMENSIONS));
-					}
+					//}else{
+						//fireFlies[i].setPosition(createRandomPosition(Parameters.DIMENSIONS));
+					//}
 				}
 				//atualiza fitness
 				bestFitness = getBestFitness();
@@ -132,7 +138,6 @@ public void updateGlobalBest(){
 			if(problema.isFitnessBetterThan(problema.evaluateSolution(fireFlies[i].
 					getBestPosition()), problema.evaluateSolution(globalBestPosition))){
 					globalBestPosition = fireFlies[i].getBestPosition().clone();
-
 			}
 		}
 	}

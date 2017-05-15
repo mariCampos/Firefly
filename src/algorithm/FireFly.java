@@ -2,14 +2,14 @@ package algorithm;
 
 public class FireFly {
 	
-	 private double[] position;
-	 private double[] bestPosition;
-	 private double error;
+	 public double[] position;
+	 public double[] bestPosition;
+	 public double error;
 	 public double beta;
 	 
 	 public FireFly( double[] position){
-		 setPosition(position);
-		 setBestPosition(position);
+		this.position = position;
+		this.bestPosition = position;
 	 }
 
 	public double[] getBestPosition() {

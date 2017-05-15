@@ -1,13 +1,13 @@
 package algorithm;
 
-import problems.Sphere;
+import problems.*;
 
 public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Sphere problema = new Sphere(30);
-		//Rosenbrock problema = new Rosenbrock(30);
+		//Sphere problema = new Sphere(30);
+		Rosenbrock problema = new Rosenbrock(30);
 		//Ackley problema = new Ackley(30); //MELHOR RESULTADO OBTIDO
 		//Rastrigin problema = new Rastrigin(30);
 		
